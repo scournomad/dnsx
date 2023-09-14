@@ -706,6 +706,25 @@ func (r *Runner) worker() {
 			r.outputchan <- jsons
 			continue
 		}
+		if r.options.JSONFile != "" {
+			var err error
+			var (
+				foutput *os.File
+				w       *bufio.Writer
+			)
+			jsons, _ := dnsData.JSON()
+			foutput, err = os.OpenFile(r.options.JSONFile, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+			if err != nil {
+				gologger.Fatal().Msgf("%s\n", err)
+			}
+			defer foutput.Close()
+			w = bufio.NewWriter(foutput)
+			defer w.Flush()
+			if foutput != nil {
+				// uses a buffer to write to file
+				_, _ = w.WriteString(jsons + "\n")
+			}
+		}
 		if r.options.Raw {
 			r.outputchan <- dnsData.Raw
 			continue

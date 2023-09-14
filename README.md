@@ -29,6 +29,9 @@
 
 `dnsx` is a fast and multi-purpose DNS toolkit designed for running various probes through the [retryabledns](https://github.com/projectdiscovery/retryabledns) library. It supports multiple DNS queries, user supplied resolvers, DNS wildcard filtering like [shuffledns](https://github.com/projectdiscovery/shuffledns) etc.
 
+# ScourNomad notes
+
+* The only thing we have changed is we have added a flag that writes JSON entries to a JSON file while preserving the human-readable output on screen
 
 # Features
 
